@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Decider Suite</title>
+
+    <!--JQUERY-->
+    <script src="vendor/jquery/jquery.min.js" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="static/css/sb-admin-2.css" th:href="@{/css/sb-admin-2.css}">
+    <script src="static/js/sb-admin-2.js" th:src="@{/js/sb-admin-2.js}"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="static/css/login.css" th:href="@{/css/login.css}">
+</head>
+<body>
+    <div id="content">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <a class="nav-item no-arrow" href="#">
+                    <img class="img-logo" src="img/logo.png">
+                </a>
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+            </ul>
+        </nav>
+        <!-- End of Topbar -->
+    </div>
+    <div class="modal-dialog text-center">
+        
+        <div class="col-sm-8 main-section">
+            <div class="modal-content">
+                <div class="col-12 user-img">
+                    <img src="static/img/undraw_profile.svg" th:src="@{/img/undraw_profile.svg}"/>
+                </div>
+                <form class="col-12" th:action="@{/login}" method="get">
+                    <div class="text-center">
+                        <h1 class="h4 mb-3">¡Bienvenido!</h1>
+                    </div>
+                    <div class="form-group" id="user-group">
+                        <input type="text" class="form-control" placeholder="Nombre de usuario" name="username"/>
+                    </div>
+                    <div class="form-group" id="contrasena-group">
+                        <input type="password" class="form-control" placeholder="Contraseña" name="password"/>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox small">
+                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                            <label class="custom-control-label" for="customCheck">Recordarme</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <button type="submit" class="button w-100 btn btn-primary">Ingresar   <i class="fas fa-sign-in-alt"></i></button>
+                    </div>
+                    <hr>
+                </form>
+                <div class="col-12 forgot">
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">
+		            Invalid username and password.
+		        </div>
+		        <div th:if="${param.logout}" class="alert alert-success" role="alert">
+		            You have been logged out.
+		        </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
