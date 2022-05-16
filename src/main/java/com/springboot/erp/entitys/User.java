@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -37,26 +39,33 @@ public class User implements Serializable {
     private Long id;
     
     @Column
+    @NotBlank(message = "El campo <Nombre> no debe estar vacio")
     @Getter @Setter
     private String name;
 
     @Column
+    @NotBlank(message = "El campo <Apellidos> no debe estar vacio")
     @Getter @Setter
     private String lastName;
 
-    @Column
+    @Column(unique=true)
+    @NotBlank(message = "El campo <usuario> no debe estar vacio")
     @Getter @Setter
     private String username;
 
-    @Column
+    @Column(unique=true)
+    @NotBlank(message = "El campo <Email> no debe estar vacio")
+    @Email(message = "Debe introducir un Email válido")
     @Getter @Setter
     private String email;
 
     @Column
+    @NotBlank(message = "Debe introducir una contraseña")
     @Getter @Setter
     private String password;
 
     @Transient
+    @NotBlank(message = "Debe confirmar la contraseña")
     @Getter @Setter
     private String confirmPassword;
     
