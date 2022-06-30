@@ -1,6 +1,6 @@
-package com.springboot.erp.repositories;
+package com.springboot.erp.users.repositories;
 
-import com.springboot.erp.entitys.User;
+import com.springboot.erp.users.entitys.User;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;

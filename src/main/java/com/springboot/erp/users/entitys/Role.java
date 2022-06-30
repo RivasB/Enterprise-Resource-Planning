@@ -1,4 +1,4 @@
-package com.springboot.erp.entitys;
+package com.springboot.erp.users.entitys;
 
 import java.io.Serializable;
 

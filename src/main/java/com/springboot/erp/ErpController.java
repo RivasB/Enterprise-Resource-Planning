@@ -1,11 +1,11 @@
-package com.springboot.erp.controllers;
+package com.springboot.erp;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class DefaultController {
+public class ErpController {
     
     @GetMapping("/")
     public String dashboard(Model model){

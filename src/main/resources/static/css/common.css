@@ -2,7 +2,19 @@
     height: 85%;
     width: 85%;
 }
+
 .img-text-top {
     height: 85%;
     width: 85%;
+}
+
+.menu {
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.bg-register-user {
+    background: url("/img/undraw_profile_details_re_ch9r.svg");
+    background-position: center;
+    background-size: cover;
 }

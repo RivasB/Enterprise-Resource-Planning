@@ -1,4 +1,4 @@
-package com.springboot.erp.entitys;
+package com.springboot.erp.users.entitys;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -65,7 +65,6 @@ public class User implements Serializable {
     private String password;
 
     @Transient
-    @NotBlank(message = "Debe confirmar la contraseña")
     @Getter @Setter
     private String confirmPassword;
     

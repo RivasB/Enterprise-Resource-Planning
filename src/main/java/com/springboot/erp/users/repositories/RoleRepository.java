@@ -1,6 +1,6 @@
-package com.springboot.erp.repositories;
+package com.springboot.erp.users.repositories;
 
-import com.springboot.erp.entitys.Role;
+import com.springboot.erp.users.entitys.Role;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

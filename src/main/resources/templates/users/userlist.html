@@ -1,31 +1,35 @@
-<div class="card shadow mb-4">
-    <div class="card-header py-3 text-right">
-        <button type="button" href="#" data-toggle="modal" data-target="#newUserModal" class="btn btn-success">
-            <i class="fa fa-plus" aria-hidden="true"></i> Añadir usuario</button>
+<div class="alert-danger" th:if="${listErrorMessage}" th:text="${formErrorMessage}"></div>
+<div class="card shadow mb-4 o-hidden border-0 shadow-lg my-5">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-address-card" aria-hidden="true"></i> Usuarios:</h6>
     </div>
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <div class="table-responsive table-striped">
+            <table class="table border-left-primary" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Usuario</th>
-                        <th>Email</th>
-                        <th>Opciones</th>
+                        <th><i class="fas fa-info-circle" aria-hidden="true"></i> Id</th>
+                        <th><i class="fas fa-address-card" aria-hidden="true"></i> Nombre y apellidos</th>
+                        <th><i class="fa fa-user" aria-hidden="true"></i> Nombre de usuario</th>
+                        <th><i class="fas fa-mail-bulk" aria-hidden="true"></i> Correo electrónico</th>
+                        <th><i class=" fas fa-shield-alt" aria-hidden="true"></i> Permisos</th>
+                        <th>
+                            <a href="/users/form/" class="btn btn-outline-primary btn-block" role="button">
+                                <i class="fas fa-user-plus" aria-hidden="true"></i> Añadir
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each = "user: ${userList}">
-                        <td th:text = "${user.id}"></td>
-                        <td th:text = "${user.name}"></td>
-                        <td th:text = "${user.lastName}"></td>
-                        <td th:text = "${user.username}"></td>
-                        <td th:text = "${user.email}"></td>
+                    <tr th:each="user: ${userList}">
+                        <td th:text="${user.id}"></td>
+                        <td th:text="${user.name} + ' ' + ${user.lastName}"></td>
+                        <td th:text="${user.username}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:each="role: ${user.roles}" th:text="${role.name}"></td>
                         <td>
-                            <a href="#" th:href="@{'/editUser/'+ ${user.id}}"><i class="fas fa-edit"></i></a>
-					|       <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${user.id} +'\');'"><i class="fas fa-user-times"></i></a>
+                            <a href="#" th:href="@{'/users/edit/'+ ${user.id}}"><i class="fas fa-edit"></i></a> |
+                            <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${user.id} +'\');'"><i class="fas fa-user-times"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -33,3 +37,4 @@
         </div>
     </div>
 </div>
+<div th:include="common/modals.html" th:remove="tag"></div>
