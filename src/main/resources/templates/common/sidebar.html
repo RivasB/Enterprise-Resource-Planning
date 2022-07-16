@@ -65,6 +65,7 @@
         </div>
     </li>
 
+    <span th:if="${#authorization.expression('hasRole(''ROLE_ADMINISTRATOR'')')}">
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -103,6 +104,7 @@
             <i class="fas fa-fw fa-users-cog"></i>
             <span>Usuarios</span></a>
     </li>
+</span>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

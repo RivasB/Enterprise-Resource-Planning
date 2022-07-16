@@ -55,6 +55,10 @@
                     <div th:if="${form}">
                         <div th:include="users/userform.html" th:remove="tag"></div>
                     </div>
+                    <div th:if="${editMode}">
+                        <div th:include="users/passwd-modal.html" th:remove="tag"></div>
+                    </div>
+                    
                 </div>
                 <!-- /.container-fluid -->
 
@@ -83,7 +87,7 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js" th:src="@{/js/demo/datatables-demo.js}"></script>
-    <script src="js/users/delete-user.js" th:src="@{/js/users/delete-user.js}"></script>
+    <script src="js/users/user.js" th:src="@{/js/users/user.js}"></script>
 
 </body>
 

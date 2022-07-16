@@ -1,68 +1,95 @@
 <div class="container">
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-header">
-            <h6 class="m-0 font-weight-bold text-primary" th:text="${editMode} ? @{Editar usuario} : @{Nuevo usuario}">Nuevo usuario</h6>
+            <h6 class="m-0 font-weight-bold text-primary" th:text="${editMode} ? @{Editar usuario} : @{Nuevo usuario}">
+                Nuevo usuario</h6>
         </div>
-        <div class="alert-danger" th:if="${formErrorMessage}" th:text="${formErrorMessage}"></div>
+        <div class="alert alert-danger" th:if="${formErrorMessage}" th:text="${formErrorMessage}"></div>
+        <div th:with="disableFields=(!${editMode} or ${form}) and ${#authorization.expression('hasRole(''ROLE_USER'')')} and !${#httpServletRequest.remoteUser==userObj.username}">
         <div class="card-body p-0">
             <div class="row">
                 <div class="col-lg-5 d-none d-lg-block bg-register-user"></div>
                 <div class="col-lg-7">
                     <div class="p-5">
-                        <form class="form" role="form" autocomplete="off" th:object="${userObj}" th:action="${editMode} ? @{/users/form/action/updated} : @{/users/form/action/created}" method="post">
-                            <input class="form-control" type=hidden th:field="${userObj.password}" th:value="password" th:if="${editMode}">
-                            <input class="form-control" type=hidden th:field="${userObj.confirmPassword}" th:value="password" th:if="${editMode}">
-                            <input class="form-control" type=hidden th:field="${userObj.id}" th:if="${editMode}">
+                        <form class="form" role="form" autocomplete="off" th:object="${userObj}"
+                            th:action="${editMode} ? @{/users/form/action/updated} : @{/users/form/action/created}"
+                            method="post">
+                            <input class="form-control" type=hidden th:field="${userObj.password}" th:value="password"
+                                th:if="${editMode}" th:disabled="${disableFields}">
+                            <input class="form-control" type=hidden th:field="${userObj.confirmPassword}"
+                                th:value="password" th:if="${editMode}" th:disabled="${disableFields}">
+                            <input class="form-control" type=hidden th:field="${userObj.id}" th:if="${editMode}" th:disabled="${disableFields}">
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input class="form-control" type="text" th:field="${userObj.name}" placeholder="Nombre">
-                                    <div class="alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                                    <input class="form-control" type="text" th:field="${userObj.name}"
+                                        placeholder="Nombre" th:disabled="${disableFields}">
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}"
+                                        th:errors="*{name}"></div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" th:field="${userObj.lastName}" placeholder="Apellidos">
-                                    <div class="alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+                                    <input class="form-control" type="text" th:field="${userObj.lastName}"
+                                        placeholder="Apellidos" th:disabled="${disableFields}">
+                                    <div class=" alert alert-danger" th:if="${#fields.hasErrors('lastName')}"
+                                        th:errors="*{lastName}"></div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="email" th:field="${userObj.email}" placeholder="Correo electrónico">
-                                <div class="alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                                <input class="form-control" type="email" th:field="${userObj.email}"
+                                    placeholder="Correo electrónico" th:disabled="${disableFields}">
+                                <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}"
+                                    th:errors="*{email}"></div>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="text" th:field="${userObj.username}" placeholder="Nombre de usuario">
-                                <div class="alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                                <input class="form-control" type="text" th:field="${userObj.username}"
+                                    placeholder="Nombre de usuario" th:disabled="${disableFields}">
+                                <div class="alert alert-danger" th:if="${#fields.hasErrors('username')}"
+                                    th:errors="*{username}"></div>
                             </div>
                             <div class="form-group row" th:if="${editMode==false or editMode==null}">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input class="form-control" type="password" th:field="${userObj.password}" placeholder="Contraseña">
-                                    <div class="alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                                    <input class="form-control" type="password" th:field="${userObj.password}"
+                                        placeholder="Contraseña" th:disabled="${disableFields}">
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}"
+                                        th:errors="*{password}"></div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="password" th:field="${userObj.confirmPassword}" placeholder="Confirmar contraseña">
-                                    <div class="alert-danger" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+                                    <input class="form-control" type="password" th:field="${userObj.confirmPassword}"
+                                        placeholder="Confirmar contraseña" th:disabled="${disableFields}">
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('confirmPassword')}"
+                                        th:errors="*{confirmPassword}"></div>
                                 </div>
                             </div>
                             <hr>
                             <div class="form-group">
                                 <label class="form-control-label">Permisos administrativos:</label>
                                 <select class="form-control" size="3" th:field="${userObj.roles}">
-                                        <option th:each="role :${roles}" th:value="${role.id}" th:text="${role.name}">
-                                        </option>
-                                    </select>
+                                    <option th:each="role :${roles}" th:value="${role.id}" th:text="${role.name}" th:disabled="${disableFields}">
+                                    </option>
+                                </select>
                             </div>
                             <hr>
-                            <div class="form-footer form-group row">
+                            <div class="form-footer form-group row" th:if="${editMode}">
                                 <div class="col-lg-12 text-right">
-                                    <input type="submit" class="btn btn-block btn-primary" th:value="${editMode} ? Actualizar : Registrar">
+                                    <button type="button" class="btn btn-block btn-success" data-toggle="modal"
+                                        th:if="${editMode}" data-target="#changePasswordModal" th:disabled="${disableFields}">Cambiar
+                                        contraseña</button>
                                 </div>
                             </div>
-                        </form>
+                            <div class="alert alert-success col-lg-12 text-center d-none" id="formSuccess">OK</div>
                     </div>
-
                 </div>
+
             </div>
             <div class="card-footer text-muted text-right">
-                <a class="btn btn-secondary" href="/users">Cancelar</a>
+                <div class="form-footer form-group row">
+                    <div class="col-lg-12 text-right">
+                        <a class="btn btn-secondary" href="/users">Cancelar</a>
+                        <input type="submit" class="btn btn-primary" th:value="${editMode} ? Actualizar : Registrar" th:disabled="${disableFields}">
+                    </div>
+                </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 </div>

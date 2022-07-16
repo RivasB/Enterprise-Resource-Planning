@@ -13,7 +13,7 @@ public class ErpController {
         return "dashboard";
     }
     
-    @GetMapping("/login")
+    @GetMapping({"/login"})
     public String login() {
         return "login";
     }

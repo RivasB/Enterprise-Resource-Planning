@@ -2,6 +2,7 @@ package com.springboot.erp.users.services;
 
 import javax.validation.Valid;
 
+import com.springboot.erp.users.dto.ChangePassword;
 import com.springboot.erp.users.entitys.User;
 
 public interface UserService {
@@ -15,4 +16,6 @@ public interface UserService {
     public User getById(Long id) throws Exception;
 
     public void delete(Long id) throws Exception;
+
+    public User changePassword(ChangePassword dto) throws Exception;
 }

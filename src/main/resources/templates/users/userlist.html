@@ -28,7 +28,7 @@
                         <td th:text="${user.email}"></td>
                         <td th:each="role: ${user.roles}" th:text="${role.name}"></td>
                         <td>
-                            <a href="#" th:href="@{'/users/edit/'+ ${user.id}}"><i class="fas fa-edit"></i></a> |
+                            <a href="#" th:href="@{'/users/edit/'+ ${user.id}}"><i class="fas fa-edit"></i></a>
                             <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${user.id} +'\');'"><i class="fas fa-user-times"></i></a>
                         </td>
                     </tr>
@@ -37,4 +37,4 @@
         </div>
     </div>
 </div>
-<div th:include="common/modals.html" th:remove="tag"></div>
+<div th:include="users/delete-modal.html" th:remove="tag"></div>

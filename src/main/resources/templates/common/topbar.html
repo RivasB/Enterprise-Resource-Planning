@@ -171,7 +171,7 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuario Desarrollador</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${#authentication.getPrincipal().getUsername()}">Usuario activo</span>
                 <img class="img-profile rounded-circle"
                     src="/img/undraw_profile.svg">
             </a>
@@ -216,7 +216,7 @@ aria-hidden="true">
         <div class="modal-body">Selecciona "Desconectarme" si estás listo para cerrar tu sesión actual.</div>
         <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="/login">Desconectarme</a>
+            <a class="btn btn-primary" href="/logout">Desconectarme</a>
         </div>
     </div>
 </div>
